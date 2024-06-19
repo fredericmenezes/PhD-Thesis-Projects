@@ -1,0 +1,3 @@
+# Ignore all files in the 'FJSP/__pycache__' subfolder.
+
+/FJSP/__pycache__/

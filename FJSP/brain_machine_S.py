@@ -567,6 +567,7 @@ class sequencing_brain:
         return
 
     def reward_record_output(self,**kwargs):
+        fig = plt.figure(figsize=(10,5.5))
         reward_record = fig.add_subplot(1,1,1)
         reward_record.set_xlabel('Time')
         reward_record.set_ylabel('Reward')
