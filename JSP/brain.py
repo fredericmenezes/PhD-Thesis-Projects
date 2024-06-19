@@ -810,6 +810,7 @@ class brain:
         ax.set_xlabel('Iterations of training')
         ax.set_ylabel('Loss of ANN')
         loss_record = np.array(self.loss_record)
+        iterations = np.arange(len(self.loss_record))
         ax.plot(iterations, loss_record)
         plt.show()
         return

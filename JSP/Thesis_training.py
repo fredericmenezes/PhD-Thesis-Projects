@@ -41,13 +41,13 @@ class shopfloor:
         #STEP 5: add a brain to the shop floor
         self.brain = brain.brain(self.env, self.job_creator, self.m_list, self.span/10, self.span,\
         DDQN_SI = 0, TEST = 0, A2C = 0, IQL = 0, I_DDQN = 0, \
-        AS = 0, TEST_AS = 0, IQL_AS = 0, I_DDQN_AS = 1, \
-        expert = 0, bsf_start = 0, reward_function = 12)
+        AS = 0, TEST_AS = 0, IQL_AS = 0, I_DDQN_AS = 0, \
+        expert = 0, bsf_start = 0, reward_function =12)
 
 
     def training_record(self, m_idx):
         fig,(ax0,ax1) = plt.subplots(2,1, figsize=(10,6), sharex=True)
-        ax0.scatter(np.array(self.brain.loss_time_record), np.array(self.brain.loss_record), s=3, c='b')
+        ax0.scatter(np.array(self.brain.loss_time_record), np.array([x.detach() for x in self.brain.loss_record]), s=3, c='b')
         ax1.scatter(np.array(self.job_creator.reward_record[m_idx][0]), np.array(self.job_creator.reward_record[m_idx][1]), s=3, c='r')
         ax0.set_ylabel('Loss of training')
         ax1.set_ylabel('Reward')

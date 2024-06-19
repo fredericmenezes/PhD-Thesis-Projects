@@ -671,6 +671,24 @@ class machine:
                 self.job_creator.complete_experience(m_idx, decision_point, r_t)
             except:
                 pass
+    
+    def get_reward10(self): # BASELINE RULE !!!
+        job_record = self.job_creator.production_record[self.job_idx]
+        path = job_record[1]
+        queued_time = np.array(job_record[2])
+        # if tardiness is non-zero and waiting time exists, machines in path get punishment
+        if self.tardiness and queued_time.sum():
+            global_reward = - np.clip(self.tardiness / 256,0,1)
+            reward = torch.ones(len(queued_time),dtype=torch.float)*global_reward
+        else:
+            reward = torch.ones(len(queued_time),dtype=torch.float)*0
+        for i,m_idx in enumerate(path):
+            r_t = reward[i]
+            decision_point = job_record[0][i][0]
+            try:
+                self.job_creator.complete_experience(m_idx, decision_point, r_t)
+            except:
+                pass
 
     def get_reward11(self): # BASELINE RULE !!!
         job_record = self.job_creator.production_record[self.job_idx]
